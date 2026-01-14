@@ -28,7 +28,7 @@ nav a.active {
   text-align: center;
   background:
     linear-gradient(rgba(10,15,40,0.75), rgba(10,15,40,0.75)),
-    url("images/jwst-disk.jpg") center/cover no-repeat;
+    url("images/jwst-disk.png") center/cover no-repeat;
   color: #ffffff;
 }
 
