@@ -17,24 +17,37 @@
 
 <section class="section">
   <h2>Publications</h2>
-
-  <p>
-    A complete list of my publications is available on
-    <a href="https://scholar.google.com" target="_blank">Google Scholar</a>.
-  </p>
-
-  <ul class="pub-list">
-    <li>
-      <strong>Author(s).</strong> Title of paper. <em>Journal</em>, Year.
-      [<a href="#">arXiv</a>]
-    </li>
-  </ul>
+  <ul id="pubs"></ul>
 </section>
 
 <footer>
   © 2026 Naman Bajaj
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bibtex-js@1.0.0/bibtex_js.min.js"></script>
+<script>
+fetch("publications.bib")
+  .then(r => r.text())
+  .then(bib => {
+    const parser = new BibtexParser();
+    parser.setInput(bib);
+    parser.bibtex();
+    const entries = parser.getEntries();
+    const ul = document.getElementById("pubs");
+
+    Object.values(entries).forEach(e => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${e.TITLE}</strong><br>
+        ${e.AUTHOR}<br>
+        <em>${e.JOURNAL}</em> (${e.YEAR})`;
+      ul.appendChild(li);
+    });
+  });
+</script>
+
+</body>
+</html>
+  
 <script>
 const toggle = document.getElementById("theme-toggle");
 if (localStorage.theme === "dark") document.body.classList.add("dark");
