@@ -75,3 +75,31 @@ footer {
   font-size: 0.9rem;
   color: #666;
 }
+
+/* ===== Dark Mode ===== */
+:root {
+  --bg: #ffffff;
+  --text: #1e1e1e;
+  --nav: #0b0f2a;
+  --accent: #1a2a6c;
+}
+
+body.dark {
+  --bg: #0e1117;
+  --text: #e6edf3;
+  --nav: #010409;
+  --accent: #7aa2ff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+nav {
+  background: var(--nav);
+}
+
+.button {
+  background: var(--accent);
+}
