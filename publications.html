@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Publications | Naman Bajaj</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <meta name="description" content="Naman Bajaj is an astronomer studying planet formation and protoplanetary disk evolution.">
+
+  <meta name="description" content="Publications by Naman Bajaj, astronomer studying planet formation and protoplanetary disks.">
   <meta name="author" content="Naman Bajaj">
-  <meta name="keywords" content="Astronomy, Planet Formation, Protoplanetary Disks, Exoplanets">
+  <meta name="keywords" content="Astronomy, Planet Formation, Protoplanetary Disks, JWST, Exoplanets">
+
+  <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
 
 <nav>
@@ -18,47 +21,57 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<section class="section">
-  <h2>Publications</h2>
-  <ul id="pubs"></ul>
-</section>
+<main>
+  <section class="section">
+    <h2>Publications</h2>
+
+    <!-- Load BibTeX file -->
+    <bibtex
+      src="publications.bib"
+      sort="year"
+      order="desc">
+    </bibtex>
+
+    <!-- Publication formatting template -->
+    <div class="bibtex_template">
+      <li>
+        <strong><span class="title"></span></strong><br>
+        <span class="author"></span><br>
+        <em><span class="journal"></span></em>
+        (<span class="year"></span>)
+        &nbsp;—&nbsp;
+        <a class="ads-link" target="_blank">
+          ADS
+          <span class="adsurl"></span>
+        </a>
+      </li>
+    </div>
+
+    <!-- Where publications will appear -->
+    <ul class="bibtex_display"></ul>
+
+  </section>
+</main>
 
 <footer>
   © 2026 Naman Bajaj
 </footer>
 
+<!-- BibTeX-JS library -->
 <script src="https://cdn.jsdelivr.net/npm/bibtex-js@1.0.0/bibtex_js.min.js"></script>
-<script>
-fetch("publications.bib")
-  .then(r => r.text())
-  .then(bib => {
-    const parser = new BibtexParser();
-    parser.setInput(bib);
-    parser.bibtex();
-    const entries = parser.getEntries();
-    const ul = document.getElementById("pubs");
 
-    Object.values(entries).forEach(e => {
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${e.TITLE}</strong><br>
-        ${e.AUTHOR}<br>
-        <em>${e.JOURNAL}</em> (${e.YEAR})`;
-      ul.appendChild(li);
-    });
+<!-- Dark mode toggle -->
+<script>
+  const toggle = document.getElementById("theme-toggle");
+
+  if (localStorage.theme === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  toggle?.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
   });
-</script>
-
-</body>
-</html>
-  
-<script>
-const toggle = document.getElementById("theme-toggle");
-if (localStorage.theme === "dark") document.body.classList.add("dark");
-
-toggle?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
-});
 </script>
 
 </body>
