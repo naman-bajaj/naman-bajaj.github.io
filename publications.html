@@ -6,7 +6,6 @@
 
   <meta name="description" content="Publications by Naman Bajaj, astronomer studying planet formation and protoplanetary disks.">
   <meta name="author" content="Naman Bajaj">
-  <meta name="keywords" content="Astronomy, Planet Formation, Protoplanetary Disks, JWST, Exoplanets">
 
   <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -22,65 +21,69 @@
 </nav>
 
 <main>
-  <section class="section">
-    <h2>Publications</h2>
+<section class="section">
+<h2>Publications</h2>
 
-    <!-- Load BibTeX file -->
-    <bibtex
-      src="publications.bib"
-      sort="year"
-      order="desc">
-    </bibtex>
+<!-- ================= BIBTEX DATA ================= -->
+<script type="text/bibtex">
+@article{Bajaj2024,
+  author  = {Bajaj, Naman S. and Pascucci, Ilaria and Gorti, Uma and Alexander, Richard and Sellek, Andrew and Morrison, Jane and Gaspar, Andras and Clarke, Cathie and Xie, Chengyan and Ballabio, Giulia and Deng, Dingshan},
+  title   = {JWST MIRI MRS Observations of T Cha: Discovery of a Spatially Resolved Disk Wind},
+  journal = {Astronomical Journal},
+  year    = {2024},
+  adsurl  = {https://ui.adsabs.harvard.edu/abs/2024AJ....167..127B}
+}
+</script>
+<!-- ================================================= -->
 
-    <!-- Publication formatting template -->
-    <div class="bibtex_template">
-      <li>
-        <strong><span class="title"></span></strong><br>
-        <span class="author"></span><br>
-        <em><span class="journal"></span></em>
-        (<span class="year"></span>)
-        &nbsp;—&nbsp;
-        <span class="adsurl"></span>
-      </li>
-    </div>
+<!-- Template -->
+<div class="bibtex_template">
+  <li>
+    <strong><span class="title"></span></strong><br>
+    <span class="author"></span><br>
+    <em><span class="journal"></span></em>
+    (<span class="year"></span>)
+    &nbsp;—&nbsp;
+    <a href="<span class='adsurl'></span>" target="_blank">ADS</a>
+  </li>
+</div>
 
-    <!-- Where publications will appear -->
-    <ul class="bibtex_display"></ul>
+<!-- Output -->
+<ul class="bibtex_display"></ul>
 
-  </section>
+</section>
 </main>
 
 <footer>
   © 2026 Naman Bajaj
 </footer>
 
-<!-- BibTeX-JS library -->
+<!-- Library -->
 <script src="https://cdn.jsdelivr.net/npm/bibtex-js@1.0.0/bibtex_js.min.js"></script>
 
+<!-- Sort newest to oldest -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const nameRegex = /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g;
+    const list = document.querySelector(".bibtex_display");
+    const items = Array.from(list.children);
 
-    document.querySelectorAll(".bibtex_display li").forEach(li => {
-      li.innerHTML = li.innerHTML.replace(
-        nameRegex,
-        match => `<strong>${match}</strong>`
-      );
+    items.sort((a, b) => {
+      const ya = parseInt(a.querySelector(".year")?.textContent || 0);
+      const yb = parseInt(b.querySelector(".year")?.textContent || 0);
+      return yb - ya;
     });
+
+    items.forEach(li => list.appendChild(li));
   });
 </script>
 
-<!-- Dark mode toggle -->
+<!-- Bold your name -->
 <script>
-  const toggle = document.getElementById("theme-toggle");
-
-  if (localStorage.theme === "dark") {
-    document.body.classList.add("dark");
-  }
-
-  toggle?.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
+  document.addEventListener("DOMContentLoaded", () => {
+    const nameRegex = /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g;
+    document.querySelectorAll(".bibtex_display li").forEach(li => {
+      li.innerHTML = li.innerHTML.replace(nameRegex, "<strong>$&</strong>");
+    });
   });
 </script>
 
