@@ -6,13 +6,14 @@
 
   <meta name="description" content="Publications by Naman Bajaj, astronomer studying planet formation and protoplanetary disks.">
   <meta name="author" content="Naman Bajaj">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
 
-<nav>
+<nav class="nav-bar">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
   <a href="research.html">Research</a>
@@ -21,11 +22,11 @@
 </nav>
 
 <main>
-<section class="section">
+<section class="section publications">
 
   <h2>Publications</h2>
 
-  <ul id="pub-list" class="pub-list"></ul>
+  <div id="pub-list"></div>
 
 </section>
 </main>
@@ -33,6 +34,11 @@
 <footer>
   © 2026 Naman Bajaj
 </footer>
+
+<!-- Fullscreen image modal -->
+<div id="img-modal" class="img-modal">
+  <img id="modal-img" alt="Publication figure">
+</div>
 
 <script>
 const publications = [
@@ -65,24 +71,25 @@ const publications = [
 // Sort newest → oldest
 publications.sort((a, b) => b.year - a.year);
 
-// Render publications
-const ul = document.getElementById("pub-list");
+const container = document.getElementById("pub-list");
 
 publications.forEach((p, i) => {
-  const li = document.createElement("li");
-  li.className = "pub-item";
+  const entry = document.createElement("div");
+  entry.className = `pub-entry ${i % 2 === 0 ? "alt1" : "alt2"}`;
 
   const authorsBolded = p.authors.replace(
     /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g,
     "<strong>$&</strong>"
   );
 
-  li.innerHTML = `
+  entry.innerHTML = `
     <div class="pub-text">
-      <strong class="pub-title">${p.title}</strong><br>
-      ${authorsBolded}<br>
-      <em>${p.journal}</em> (${p.year}) —
-      <a href="${p.ads}" target="_blank" class="ads-link">ADS</a>
+      <h3 class="pub-title">${p.title}</h3>
+      <p>${authorsBolded}</p>
+      <p>
+        <em>${p.journal}</em> (${p.year}) —
+        <a href="${p.ads}" target="_blank" class="ads-link">ADS</a>
+      </p>
     </div>
 
     <div class="pub-image">
@@ -90,7 +97,24 @@ publications.forEach((p, i) => {
     </div>
   `;
 
-  ul.appendChild(li);
+  container.appendChild(entry);
+});
+
+// Image modal behavior
+const modal = document.getElementById("img-modal");
+const modalImg = document.getElementById("modal-img");
+
+document.addEventListener("click", e => {
+  if (e.target.matches(".pub-image img")) {
+    modalImg.src = e.target.src;
+    modal.classList.add("open");
+  } else if (e.target === modal) {
+    modal.classList.remove("open");
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") modal.classList.remove("open");
 });
 </script>
 
