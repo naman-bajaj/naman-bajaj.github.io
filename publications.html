@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Publications | Naman Bajaj</title>
 
-  <meta name="description" content="Publications by Naman Bajaj">
+  <meta name="description" content="Publications by Naman Bajaj, astronomer studying planet formation and protoplanetary disks.">
   <meta name="author" content="Naman Bajaj">
 
   <link rel="stylesheet" href="assets/style.css">
@@ -22,8 +22,11 @@
 
 <main>
 <section class="section">
+
   <h2>Publications</h2>
-  <ul id="pub-list"></ul>
+
+  <ul id="pub-list" class="pub-list"></ul>
+
 </section>
 </main>
 
@@ -38,18 +41,20 @@ const publications = [
     authors: "Bajaj, Naman S.; Pascucci, Ilaria; Gorti, Uma; Alexander, Richard; Sellek, Andrew; Morrison, Jane; Gaspar, Andras; Clarke, Cathie; Xie, Chengyan; Ballabio, Giulia; Deng, Dingshan",
     journal: "Astronomical Journal",
     year: 2024,
-    ads: "https://ui.adsabs.harvard.edu/abs/2024AJ....167..127B"
+    ads: "https://ui.adsabs.harvard.edu/abs/2024AJ....167..127B",
+    image: "assets/images/tcha_miri.jpg"
   }
 ];
 
 // Sort newest → oldest
 publications.sort((a, b) => b.year - a.year);
 
-// Render
+// Render publications
 const ul = document.getElementById("pub-list");
 
-publications.forEach(p => {
+publications.forEach((p, i) => {
   const li = document.createElement("li");
+  li.className = "pub-item";
 
   const authorsBolded = p.authors.replace(
     /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g,
@@ -57,10 +62,16 @@ publications.forEach(p => {
   );
 
   li.innerHTML = `
-    <strong>${p.title}</strong><br>
-    ${authorsBolded}<br>
-    <em>${p.journal}</em> (${p.year}) — 
-    <a href="${p.ads}" target="_blank">ADS</a>
+    <div class="pub-text">
+      <strong class="pub-title">${p.title}</strong><br>
+      ${authorsBolded}<br>
+      <em>${p.journal}</em> (${p.year}) —
+      <a href="${p.ads}" target="_blank" class="ads-link">ADS</a>
+    </div>
+
+    <div class="pub-image">
+      <img src="${p.image}" alt="Publication figure">
+    </div>
   `;
 
   ul.appendChild(li);
