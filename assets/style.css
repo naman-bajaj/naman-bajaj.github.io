@@ -84,13 +84,12 @@ nav a.active {
   text-align: center;
 }
 
-/* Split content: text left, photo right */
 .hero-content {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 50px;
-  flex-wrap: wrap; /* responsive */
+  flex-wrap: wrap;
   max-width: 1000px;
   margin-top: 40px;
 }
@@ -131,7 +130,6 @@ nav a.active {
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
-/* Subtitle below hero-name (optional) */
 .subtitle {
   font-size: 1.2rem;
   opacity: 0.9;
@@ -158,6 +156,64 @@ nav a.active {
 }
 
 /* ==========================
+   Publications
+========================== */
+.pub-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pub-item {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.4rem;
+  border-radius: 14px;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pub-item:nth-child(odd) {
+  background-color: #f2f5f9;
+}
+
+.pub-item:nth-child(even) {
+  background-color: #e6edf6;
+}
+
+.pub-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.pub-text {
+  line-height: 1.6;
+}
+
+.pub-title {
+  font-size: 1.05rem;
+}
+
+.ads-link {
+  color: #1a73e8 !important;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.ads-link:hover {
+  color: #0c47a1 !important;
+}
+
+.pub-image img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ==========================
    Footer
 ========================== */
 footer {
@@ -175,6 +231,8 @@ footer {
   --text: #1e1e1e;
   --nav: #0b0f2a;
   --accent: #1a2a6c;
+  --pub-odd: #f2f5f9;
+  --pub-even: #e6edf6;
 }
 
 body.dark {
@@ -182,6 +240,8 @@ body.dark {
   --text: #e6edf3;
   --nav: #010409;
   --accent: #7aa2ff;
+  --pub-odd: #161b22;
+  --pub-even: #1f242d;
 }
 
 body {
@@ -197,8 +257,17 @@ nav {
   background: var(--accent);
 }
 
-#theme-toggle {
-  color: var(--text);
+/* Dark mode publications */
+body.dark .pub-item:nth-child(odd) {
+  background-color: var(--pub-odd);
+}
+
+body.dark .pub-item:nth-child(even) {
+  background-color: var(--pub-even);
+}
+
+body.dark .ads-link {
+  color: #7aa2ff !important;
 }
 
 /* ==========================
@@ -221,5 +290,13 @@ nav {
 
   .hero-text p {
     font-size: 1.1rem;
+  }
+
+  .pub-item {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-image {
+    text-align: center;
   }
 }
