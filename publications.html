@@ -19,7 +19,6 @@
   <a href="research.html" class="nav-link">Research</a>
   <a href="publications.html" class="nav-link">Publications</a>
   <a href="contact.html" class="nav-link">Contact</a>
-
   <button id="theme-toggle">🌓</button>
 </nav>
 
@@ -27,6 +26,25 @@
 <section class="section publications">
 
   <h2>Publications</h2>
+
+  <!-- FILTER CONTROLS -->
+  <div class="pub-filters">
+    <label>
+      Year:
+      <select id="year-filter">
+        <option value="all">All</option>
+      </select>
+    </label>
+
+    <label>
+      Authorship:
+      <select id="author-filter">
+        <option value="all">All</option>
+        <option value="first">First author</option>
+        <option value="co">Co-author</option>
+      </select>
+    </label>
+  </div>
 
   <div id="pub-list"></div>
 
@@ -50,7 +68,7 @@ const publications = [
     journal: "Nature Astronomy",
     year: 2025,
     ads: "https://ui.adsabs.harvard.edu/abs/2025NatAs...9...81P",
-    image: "assets/images/jwst_disk_winds.jpg" // replace with the relevant figure
+    image: "assets/images/jwst_disk_winds.jpg"
   },
   {
     title: "JWST Captures a Sudden Stellar Outburst and Inner Disk Wall Destruction",
@@ -58,7 +76,7 @@ const publications = [
     journal: "Astrophysical Journal",
     year: 2025,
     ads: "https://ui.adsabs.harvard.edu/abs/2025ApJ...978...34X",
-    image: "assets/images/jwst_outburst.jpg" // replace with the appropriate figure
+    image: "assets/images/jwst_outburst.jpg"
   },
   {
     title: "Class I/II Jets with JWST: Mass-loss Rates, Asymmetries, and Binary-induced Wigglings",
@@ -85,12 +103,12 @@ const publications = [
     image: "assets/images/tcha_miri.jpg"
   },
   {
-  title: "FORCAST Imaging of Two Small Nearby Clusters: The Coronet and B 59",
-  authors: "Sandell, Göran; Reipurth, Bo; Vacca, William D.; Bajaj, Naman S.",
-  journal: "Astrophysical Journal",
-  year: 2021,
-  ads: "https://ui.adsabs.harvard.edu/abs/2021ApJ...920....7S",
-  image: "assets/images/coronet_b59.jpg" // replace with a relevant figure
+    title: "FORCAST Imaging of Two Small Nearby Clusters: The Coronet and B 59",
+    authors: "Sandell, Göran; Reipurth, Bo; Vacca, William D.; Bajaj, Naman S.",
+    journal: "Astrophysical Journal",
+    year: 2021,
+    ads: "https://ui.adsabs.harvard.edu/abs/2021ApJ...920....7S",
+    image: "assets/images/coronet_b59.jpg"
   }
 ];
 
@@ -98,70 +116,65 @@ const publications = [
 publications.sort((a, b) => b.year - a.year);
 
 const container = document.getElementById("pub-list");
+const yearFilter = document.getElementById("year-filter");
+const authorFilter = document.getElementById("author-filter");
 
-publications.forEach((p, i) => {
-  const entry = document.createElement("div");
-  entry.className = `pub-entry ${i % 2 === 0 ? "alt1" : "alt2"}`;
-
-  const authorsBolded = p.authors.replace(
-    /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g,
-    "<strong>$&</strong>"
-  );
-
-  entry.innerHTML = `
-    <div class="pub-text">
-      <h3 class="pub-title">${p.title}</h3>
-      <p>${authorsBolded}</p>
-      <p>
-        <em>${p.journal}</em> (${p.year}) —
-        <a href="${p.ads}" target="_blank" class="ads-link">View on ADS</a>
-      </p>
-    </div>
-
-    <div class="pub-image">
-      <img src="${p.image}" alt="Publication figure">
-    </div>
-  `;
-
-  container.appendChild(entry);
+// Populate year dropdown
+[...new Set(publications.map(p => p.year))].forEach(year => {
+  const opt = document.createElement("option");
+  opt.value = year;
+  opt.textContent = year;
+  yearFilter.appendChild(opt);
 });
 
-// Image modal behavior
+function renderPublications() {
+  container.innerHTML = "";
+
+  const yearVal = yearFilter.value;
+  const authorVal = authorFilter.value;
+
+  publications
+    .filter(p => yearVal === "all" || p.year == yearVal)
+    .filter(p => {
+      if (authorVal === "all") return true;
+      const firstAuthor = p.authors.split(";")[0];
+      return authorVal === "first"
+        ? firstAuthor.includes("Bajaj")
+        : !firstAuthor.includes("Bajaj");
+    })
+    .forEach((p, i) => {
+      const entry = document.createElement("div");
+      entry.className = `pub-entry ${i % 2 === 0 ? "alt1" : "alt2"}`;
+
+      const authorsBolded = p.authors.replace(
+        /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g,
+        "<strong>$&</strong>"
+      );
+
+      entry.innerHTML = `
+        <div class="pub-text">
+          <h3 class="pub-title">${p.title}</h3>
+          <p>${authorsBolded}</p>
+          <p><em>${p.journal}</em> (${p.year}) —
+            <a href="${p.ads}" target="_blank" class="ads-link">View on ADS</a>
+          </p>
+        </div>
+        <div class="pub-image">
+          <img src="${p.image}" alt="Publication figure">
+        </div>
+      `;
+
+      container.appendChild(entry);
+    });
+}
+
+yearFilter.addEventListener("change", renderPublications);
+authorFilter.addEventListener("change", renderPublications);
+renderPublications();
+
+// Image modal
 const modal = document.getElementById("img-modal");
 const modalImg = document.getElementById("modal-img");
 
 document.addEventListener("click", e => {
-  if (e.target.matches(".pub-image img")) {
-    modalImg.src = e.target.src;
-    modal.classList.add("open");
-  } else if (e.target === modal) {
-    modal.classList.remove("open");
-  }
-});
-
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") modal.classList.remove("open");
-});
-</script>
-
-<script>
-const toggle = document.getElementById("theme-toggle");
-if (localStorage.theme === "dark") document.body.classList.add("dark");
-
-toggle?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
-});
-</script>
-
-<script>
-const links = document.querySelectorAll('.nav-link');
-links.forEach(link => {
-  if (link.href === window.location.href) {
-    link.classList.add('active');
-  }
-});
-</script>
-
-</body>
-</html>
+  if (e.target.matches("
