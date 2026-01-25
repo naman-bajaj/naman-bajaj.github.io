@@ -10,56 +10,108 @@
 
   <link rel="stylesheet" href="assets/style.css">
   <style>
+    /* Enhanced Publications Page Styling */
+    
+    /* Page Header */
+    .publications h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+
+    /* Publication count badge */
+    .pub-count {
+      display: inline-block;
+      margin-left: 1rem;
+      padding: 0.4rem 0.9rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #667eea;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+    }
+
+    body.dark .pub-count {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0.25) 100%);
+      color: #a0b4ff;
+      border-color: rgba(102, 126, 234, 0.4);
+    }
+
     /* Modern filter controls styling */
     .filter-controls {
       display: flex;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin: 2rem 0 2.5rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-radius: 12px;
+      border: 2px solid rgba(102, 126, 234, 0.1);
       flex-wrap: wrap;
-      align-items: center;
+      align-items: flex-end;
+    }
+
+    body.dark .filter-controls {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border-color: rgba(102, 126, 234, 0.2);
     }
 
     .filter-group {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      flex: 1;
+      min-width: 180px;
     }
 
     .filter-group label {
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-color, #333);
-      opacity: 0.8;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .filter-group label::before {
+      content: '🔍';
+      font-size: 1rem;
     }
 
     .filter-select {
-      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      padding: 0.75rem 2.5rem 0.75rem 1rem;
       font-size: 1rem;
-      border: 2px solid rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      border-radius: 10px;
       background-color: var(--bg-color, #fff);
       color: var(--text-color, #333);
       cursor: pointer;
       transition: all 0.3s ease;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 0.8rem center;
+      background-position: right 0.9rem center;
       background-size: 12px;
-      min-width: 180px;
+      font-weight: 500;
     }
 
     .filter-select:hover {
-      border-color: rgba(0, 0, 0, 0.3);
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
     }
 
     .filter-select:focus {
       outline: none;
-      border-color: #4a90e2;
-      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
     }
 
-    /* Dark mode styles */
+    /* Dark mode filter styles */
     body.dark .filter-group label {
       color: #e0e0e0;
     }
@@ -67,37 +119,218 @@
     body.dark .filter-select {
       background-color: #2a2a2a;
       color: #e0e0e0;
-      border-color: rgba(255, 255, 255, 0.2);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      border-color: rgba(102, 126, 234, 0.3);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0b4ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     }
 
     body.dark .filter-select:hover {
-      border-color: rgba(255, 255, 255, 0.4);
+      border-color: rgba(102, 126, 234, 0.6);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
     }
 
     body.dark .filter-select:focus {
       border-color: #6ab0f3;
-      box-shadow: 0 0 0 3px rgba(106, 176, 243, 0.2);
+      box-shadow: 0 0 0 4px rgba(106, 176, 243, 0.2);
     }
 
-    /* Hide publications with a smooth transition */
+    /* Enhanced publication entries */
     .pub-entry {
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
     }
 
+    .pub-entry::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 5px;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pub-entry:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .pub-entry:hover::before {
+      opacity: 1;
+    }
+
+    body.dark .pub-entry {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark .pub-entry:hover {
+      border-color: rgba(102, 126, 234, 0.4);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Publication title enhancement */
+    .pub-title {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .pub-entry:hover .pub-title {
+      color: #667eea;
+    }
+
+    body.dark .pub-entry:hover .pub-title {
+      color: #a0b4ff;
+    }
+
+    /* First author badge */
+    .first-author-badge {
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.2rem 0.6rem;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      vertical-align: middle;
+      box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Enhanced ADS link */
+    .ads-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #667eea;
+      transition: all 0.2s ease;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      margin-left: 0.2rem;
+    }
+
+    .ads-link::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .ads-link:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: #764ba2;
+    }
+
+    .ads-link:hover::after {
+      transform: translateX(3px);
+    }
+
+    body.dark .ads-link {
+      color: #a0b4ff;
+    }
+
+    body.dark .ads-link:hover {
+      background: rgba(102, 126, 234, 0.2);
+      color: #c0d0ff;
+    }
+
+    /* Enhanced image styling */
+    .pub-image img {
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .pub-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image modal enhancement */
+    .img-modal {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .img-modal img {
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hide publications with smooth transition */
     .pub-entry.hidden {
       display: none;
     }
 
+    /* Year divider */
+    .year-divider {
+      display: flex;
+      align-items: center;
+      margin: 2.5rem 0 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #667eea;
+      gap: 1rem;
+    }
+
+    .year-divider::after {
+      content: '';
+      flex: 1;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.5) 0%, transparent 100%);
+      border-radius: 2px;
+    }
+
+    body.dark .year-divider {
+      color: #a0b4ff;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #999;
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    .empty-state::before {
+      content: '📚';
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
     /* Responsive design */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .publications h2 {
+        font-size: 2rem;
+      }
+
       .filter-controls {
         flex-direction: column;
         align-items: stretch;
+        padding: 1rem;
       }
 
-      .filter-select {
+      .filter-group {
         min-width: 100%;
+      }
+
+      .pub-count {
+        display: block;
+        margin: 0.5rem 0 0 0;
+        text-align: center;
       }
     }
   </style>
@@ -119,6 +352,7 @@
 <section class="section publications">
 
   <h2>Publications</h2>
+  <span class="pub-count" id="pub-count">6 Publications</span>
 
   <!-- Filter Controls -->
   <div class="filter-controls">
@@ -140,6 +374,10 @@
   </div>
 
   <div id="pub-list"></div>
+  
+  <div class="empty-state" id="empty-state">
+    No publications match your filters
+  </div>
 
 </section>
 </main>
@@ -239,9 +477,11 @@ publications.forEach((p, i) => {
     "<strong>$&</strong>"
   );
 
+  const firstAuthorBadge = p.firstAuthor ? '<span class="first-author-badge">First Author</span>' : '';
+
   entry.innerHTML = `
     <div class="pub-text">
-      <h3 class="pub-title">${p.title}</h3>
+      <h3 class="pub-title">${p.title}${firstAuthorBadge}</h3>
       <p>${authorsBolded}</p>
       <p>
         <em>${p.journal}</em> (${p.year}) —
@@ -250,7 +490,7 @@ publications.forEach((p, i) => {
     </div>
 
     <div class="pub-image">
-      <img src="${p.image}" alt="Publication figure">
+      <img src="${p.image}" alt="Publication figure" loading="lazy">
     </div>
   `;
 
@@ -260,10 +500,13 @@ publications.forEach((p, i) => {
 
 // Filter functionality
 const authorshipFilter = document.getElementById("authorship-filter");
+const pubCount = document.getElementById("pub-count");
+const emptyState = document.getElementById("empty-state");
 
 function applyFilters() {
   const selectedYear = yearFilter.value;
   const selectedAuthorship = authorshipFilter.value;
+  let visibleCount = 0;
 
   pubEntries.forEach(entry => {
     const yearMatch = selectedYear === "all" || entry.dataset.year === selectedYear;
@@ -274,10 +517,21 @@ function applyFilters() {
 
     if (yearMatch && authorshipMatch) {
       entry.classList.remove("hidden");
+      visibleCount++;
     } else {
       entry.classList.add("hidden");
     }
   });
+
+  // Update count badge
+  pubCount.textContent = `${visibleCount} Publication${visibleCount !== 1 ? 's' : ''}`;
+
+  // Show/hide empty state
+  if (visibleCount === 0) {
+    emptyState.classList.add("show");
+  } else {
+    emptyState.classList.remove("show");
+  }
 }
 
 yearFilter.addEventListener("change", applyFilters);
@@ -299,7 +553,28 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") modal.classList.remove("open");
 });
+
+// Add smooth scroll on load
+window.addEventListener("load", () => {
+  document.querySelectorAll(".pub-entry").forEach((entry, i) => {
+    entry.style.animation = `fadeInUp 0.5s ease forwards ${i * 0.1}s`;
+    entry.style.opacity = "0";
+  });
+});
 </script>
+
+<style>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 
 <script>
 const toggle = document.getElementById("theme-toggle");
