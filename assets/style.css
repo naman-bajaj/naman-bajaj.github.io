@@ -364,27 +364,31 @@ body.dark .ads-link {
 /* ==========================
    Contact card background logos
 ========================== */
-.contact-email {
-  background: rgba(26,42,108,0.08) url('assets/images/outlook-logo.png') no-repeat top right;
-  background-size: 50px 50px;
+.contact-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  border-radius: 16px;
+  color: #1e1e1e;
+  font-family: 'Inter', sans-serif;
+  background-color: rgba(250, 250, 250, 0.95);
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 60px 60px; /* adjust size as needed */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contact-scholar {
-  background: rgba(122,162,255,0.08) url('assets/images/google-scholar-logo.png') no-repeat top right;
-  background-size: 50px 50px;
-}
+.contact-card.alt1 { background-color: rgba(122,162,255,0.08); }
+.contact-card.alt2 { background-color: rgba(26,42,108,0.08); }
 
-.contact-orcid {
-  background: rgba(26,42,108,0.08) url('assets/images/orcid-logo.png') no-repeat top right;
-  background-size: 50px 50px;
-}
+.contact-card.email { background-image: url('assets/images/outlook.png'); }
+.contact-card.scholar { background-image: url('assets/images/google_scholar.png'); }
+.contact-card.orcid { background-image: url('assets/images/orcid.png'); }
+.contact-card.researchgate { background-image: url('assets/images/researchgate.png'); }
 
-.contact-researchgate {
-  background: rgba(122,162,255,0.08) url('assets/images/researchgate-logo.png') no-repeat top right;
-  background-size: 50px 50px;
-}
-
-  .hero-text p {
-    font-size: 1.1rem;
-  }
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
