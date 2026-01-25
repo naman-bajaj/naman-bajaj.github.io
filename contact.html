@@ -15,13 +15,292 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Modern Contact Page Styles */
+    .contact-hero {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .contact-hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-hero p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    /* Contact Cards Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .contact-card {
+      position: relative;
+      padding: 1.8rem;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(0, 0, 0, 0.08);
+      background: var(--bg-color, #fff);
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .contact-card p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .contact-card a {
+      text-decoration: none;
+      color: #667eea;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .contact-card a:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+
+    /* Copy Email Button */
+    .email-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .copy-btn:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .copy-btn.copied {
+      background: #10b981;
+      color: white;
+    }
+
+    /* Form Styling */
+    .contact-form-wrapper {
+      max-width: 700px;
+      margin: 4rem auto 0;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-radius: 16px;
+      border: 2px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .contact-form-wrapper h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--bg-color, #fff);
+      color: var(--text-color, #333);
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .form-notice {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 1rem;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      padding: 1rem;
+      background: #10b981;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: slideIn 0.3s ease;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dark Mode Adjustments */
+    body.dark .contact-card {
+      background: #2a2a2a;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark .contact-card:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    body.dark .contact-form-wrapper {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .form-group input,
+    body.dark .form-group textarea {
+      background: #2a2a2a;
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #e0e0e0;
+    }
+
+    body.dark .form-group input:focus,
+    body.dark .form-group textarea:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .copy-btn {
+      background: #3a3a3a;
+      color: #e0e0e0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .contact-hero h2 {
+        font-size: 2rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-form-wrapper {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ==========================
-     Navbar
-========================== -->
+<!-- Navbar -->
 <nav class="nav-bar">
   <a href="index.html" class="nav-link">Home</a>
   <a href="about.html" class="nav-link">About</a>
@@ -32,123 +311,110 @@
   <button id="theme-toggle">🌓</button>
 </nav>
 
-<!-- ==========================
-     Contact Section
-========================== -->
-<section class="section" style="max-width: 900px;">
-  <h2>Get in Touch!</h2>
+<!-- Contact Section -->
+<section class="section" style="max-width: 1000px;">
+  
+  <!-- Hero Section -->
+  <div class="contact-hero">
+    <h2>Get in Touch</h2>
+    <p>
+      I'm happy to hear from researchers, students, media, or anyone interested in astronomy and planet formation. 
+      Whether it's for collaborations, data requests, academic opportunities, speaking invitations, or guidance, please reach out.
+    </p>
+  </div>
 
-  <p style="max-width: 700px; font-size: 1.05rem; opacity: 0.9;">
-    I’m happy to hear from researchers, students, media, or anyone interested in astronomy and planet formation. 
-    Whether it’s for collaborations, data requests, academic opportunities, speaking invitations, or guidance, please get in touch. 
-    I strive to respond thoughtfully and promptly.
-  </p>
-
-  <!-- ==========================
-       Contact Cards (2x2 Grid)
-  ========================== -->
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 35px;">
-
-    <div class="contact-card alt1 email">
-      <div class="pub-text">
-        <h3>Email</h3>
-        <p><a class="ads-link" href="mailto:namanbajaj@arizona.edu">namanbajaj@arizona.edu</a></p>
+  <!-- Contact Cards -->
+  <div class="contact-grid">
+    
+    <div class="contact-card">
+      <span class="icon">📧</span>
+      <h3>Email</h3>
+      <div class="email-container">
+        <a href="mailto:namanbajaj@arizona.edu">namanbajaj@arizona.edu</a>
+        <button class="copy-btn" onclick="copyEmail(this)">Copy</button>
       </div>
     </div>
 
-    <div class="contact-card alt1 linkedin">
-      <div class="pub-text">
-        <h3>LinkedIn</h3>
-        <p><a class="ads-link" href="https://www.linkedin.com/in/naman-bajaj-a5ab52143/" target="_blank">View publications & citations</a></p>
-      </div>
+    <div class="contact-card">
+      <span class="icon">🎓</span>
+      <h3>Google Scholar</h3>
+      <p><a href="https://scholar.google.com/citations?user=YmjCZWAAAAAJ&hl=en" target="_blank">View publications & citations</a></p>
+    </div>
+
+    <div class="contact-card">
+      <span class="icon">🔗</span>
+      <h3>LinkedIn</h3>
+      <p><a href="https://www.linkedin.com/in/naman-bajaj-a5ab52143/" target="_blank">Professional profile</a></p>
     </div>
     
-    <div class="contact-card alt2 scholar">
-      <div class="pub-text">
-        <h3>Google Scholar</h3>
-        <p><a class="ads-link" href="https://scholar.google.com/citations?user=YmjCZWAAAAAJ&hl=en" target="_blank">View publications & citations</a></p>
-      </div>
+    <div class="contact-card">
+      <span class="icon">🆔</span>
+      <h3>ORCID</h3>
+      <p><a href="https://orcid.org/0000-0003-3401-1704" target="_blank">0000-0003-3401-1704</a></p>
     </div>
     
-    <div class="contact-card alt1 orcid">
-      <div class="pub-text">
-        <h3>ORCID</h3>
-        <p><a class="ads-link" href="https://orcid.org/0000-0003-3401-1704" target="_blank">0000-0003-3401-1704</a></p>
-      </div>
-    </div>
-    
-    <div class="contact-card alt2 researchgate">
-      <div class="pub-text">
-        <h3>ResearchGate</h3>
-        <p><a class="ads-link" href="https://www.researchgate.net/profile/Naman-Bajaj-2" target="_blank">Research profile</a></p>
-      </div>
+    <div class="contact-card">
+      <span class="icon">🔬</span>
+      <h3>ResearchGate</h3>
+      <p><a href="https://www.researchgate.net/profile/Naman-Bajaj-2" target="_blank">Research profile</a></p>
     </div>
 
+    <div class="contact-card">
+      <span class="icon">📊</span>
+      <h3>NASA ADS</h3>
+      <p><a href="https://ui.adsabs.harvard.edu/search/q=author%3A%22Bajaj%2C%20Naman%22&sort=date%20desc" target="_blank">Browse all papers</a></p>
+    </div>
 
   </div>
 
-  <!-- ==========================
-       Formspree Email Form
-  ========================== -->
-  <div style="margin-top: 60px;">
-    <h3 style="font-family: 'Source Serif 4', serif;">Send me a message</h3>
+  <!-- Contact Form -->
+  <div class="contact-form-wrapper">
+    <h3>Send Me a Message</h3>
+    
+    <div class="success-message" id="successMessage">
+      ✓ Message sent successfully! I'll get back to you soon.
+    </div>
 
-    <form
-      action="https://formspree.io/f/mdaevgja" 
-      method="POST"
-      style="max-width: 700px; margin-top: 20px;"
-    >
-      <div style="display: flex; flex-direction: column; gap: 15px;">
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          required
-          style="padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.15); font-size: 1rem;"
-        >
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Your email"
-          required
-          style="padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.15); font-size: 1rem;"
-        >
-
-        <textarea
-          name="message"
-          rows="5"
-          placeholder="Your message"
-          required
-          style="padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.15); font-size: 1rem; resize: vertical;"
-        ></textarea>
-
-        <button type="submit" class="button" style="align-self: flex-start;">
-          Send Message
-        </button>
-
+    <form action="https://formspree.io/f/mdaevgja" method="POST" onsubmit="handleSubmit(event)">
+      
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required placeholder="Jane Doe">
       </div>
-    </form>
 
-    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
-      Your message will be sent securely via Formspree.
-    </p>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required placeholder="jane@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Collaboration opportunity">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required placeholder="Tell me more about your inquiry..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+      
+      <p class="form-notice">
+        Secured by Formspree • Your data is protected
+      </p>
+    </form>
   </div>
 
 </section>
 
-<!-- ==========================
-     Footer
-========================== -->
+<!-- Footer -->
 <footer>
   © 2026 Naman Bajaj
 </footer>
 
-<!-- ==========================
-     Scripts
-========================== -->
+<!-- Scripts -->
 <script>
+// Theme toggle
 const toggle = document.getElementById("theme-toggle");
 if (localStorage.theme === "dark") document.body.classList.add("dark");
 
@@ -156,14 +422,37 @@ toggle?.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
 });
-</script>
 
-<script>
+// Active nav link
 document.querySelectorAll('.nav-link').forEach(link => {
   if (link.href === window.location.href) {
     link.classList.add('active');
   }
 });
+
+// Copy email to clipboard
+function copyEmail(button) {
+  const email = "namanbajaj@arizona.edu";
+  navigator.clipboard.writeText(email).then(() => {
+    button.textContent = "Copied!";
+    button.classList.add("copied");
+    setTimeout(() => {
+      button.textContent = "Copy";
+      button.classList.remove("copied");
+    }, 2000);
+  });
+}
+
+// Form submission handler
+function handleSubmit(event) {
+  // Let the form submit naturally to Formspree
+  // But show success message after a brief delay
+  const form = event.target;
+  const successMessage = document.getElementById('successMessage');
+  
+  // Show success after form processes (Formspree redirects by default)
+  // This is optional - you may want to configure Formspree to return JSON instead
+}
 </script>
 
 </body>
