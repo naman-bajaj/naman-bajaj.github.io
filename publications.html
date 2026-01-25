@@ -9,6 +9,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* Modern filter controls styling */
+    .filter-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-color, #333);
+      opacity: 0.8;
+    }
+
+    .filter-select {
+      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      font-size: 1rem;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      background-color: var(--bg-color, #fff);
+      color: var(--text-color, #333);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.8rem center;
+      background-size: 12px;
+      min-width: 180px;
+    }
+
+    .filter-select:hover {
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    /* Dark mode styles */
+    body.dark .filter-group label {
+      color: #e0e0e0;
+    }
+
+    body.dark .filter-select {
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+      border-color: rgba(255, 255, 255, 0.2);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    }
+
+    body.dark .filter-select:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    body.dark .filter-select:focus {
+      border-color: #6ab0f3;
+      box-shadow: 0 0 0 3px rgba(106, 176, 243, 0.2);
+    }
+
+    /* Hide publications with a smooth transition */
+    .pub-entry {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .pub-entry.hidden {
+      display: none;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-select {
+        min-width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -27,6 +119,25 @@
 <section class="section publications">
 
   <h2>Publications</h2>
+
+  <!-- Filter Controls -->
+  <div class="filter-controls">
+    <div class="filter-group">
+      <label for="year-filter">Filter by Year</label>
+      <select id="year-filter" class="filter-select">
+        <option value="all">All Years</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="authorship-filter">Filter by Authorship</label>
+      <select id="authorship-filter" class="filter-select">
+        <option value="all">All Publications</option>
+        <option value="first">First Author</option>
+        <option value="co">Co-Authored</option>
+      </select>
+    </div>
+  </div>
 
   <div id="pub-list"></div>
 
@@ -50,7 +161,8 @@ const publications = [
     journal: "Nature Astronomy",
     year: 2025,
     ads: "https://ui.adsabs.harvard.edu/abs/2025NatAs...9...81P",
-    image: "assets/images/jwst_disk_winds.jpg" // replace with the relevant figure
+    image: "assets/images/jwst_disk_winds.jpg",
+    firstAuthor: false
   },
   {
     title: "JWST Captures a Sudden Stellar Outburst and Inner Disk Wall Destruction",
@@ -58,7 +170,8 @@ const publications = [
     journal: "Astrophysical Journal",
     year: 2025,
     ads: "https://ui.adsabs.harvard.edu/abs/2025ApJ...978...34X",
-    image: "assets/images/jwst_outburst.jpg" // replace with the appropriate figure
+    image: "assets/images/jwst_outburst.jpg",
+    firstAuthor: false
   },
   {
     title: "Class I/II Jets with JWST: Mass-loss Rates, Asymmetries, and Binary-induced Wigglings",
@@ -66,15 +179,17 @@ const publications = [
     journal: "Astronomical Journal",
     year: 2025,
     ads: "https://ui.adsabs.harvard.edu/abs/2025AJ....169..296B",
-    image: "assets/images/jwst_jets.jpg"
+    image: "assets/images/jwst_jets.jpg",
+    firstAuthor: true
   },
   {
     title: "Modeling JWST MIRI-MRS Observations of T Cha: Mid-IR Noble Gas Emission Tracing a Dense Disk Wind",
     authors: "Sellek, Andrew D.; Bajaj, Naman S.; Pascucci, Ilaria; Clarke, Cathie J.; Alexander, Richard; Xie, Chengyan; Ballabio, Giulia; Deng, Dingshan; Gorti, Uma; Gaspar, Andras; Morrison, Jane",
     journal: "Astronomical Journal",
     year: 2024,
-    ads: "https://ui.adsabs.harvard.edu/abs/2024AJ....167..223S",
-    image: "assets/images/tcha_modeling.jpg"
+    ads: "https://ui.adsabs.harvard.edu/abs/2024AJ..167..223S",
+    image: "assets/images/tcha_modeling.jpg",
+    firstAuthor: false
   },
   {
     title: "JWST MIRI MRS Observations of T Cha: Discovery of a Spatially Resolved Disk Wind",
@@ -82,26 +197,42 @@ const publications = [
     journal: "Astronomical Journal",
     year: 2024,
     ads: "https://ui.adsabs.harvard.edu/abs/2024AJ....167..127B",
-    image: "assets/images/tcha_miri.jpg"
+    image: "assets/images/tcha_miri.jpg",
+    firstAuthor: true
   },
   {
-  title: "FORCAST Imaging of Two Small Nearby Clusters: The Coronet and B 59",
-  authors: "Sandell, Göran; Reipurth, Bo; Vacca, William D.; Bajaj, Naman S.",
-  journal: "Astrophysical Journal",
-  year: 2021,
-  ads: "https://ui.adsabs.harvard.edu/abs/2021ApJ...920....7S",
-  image: "assets/images/coronet_b59.jpg" // replace with a relevant figure
+    title: "FORCAST Imaging of Two Small Nearby Clusters: The Coronet and B 59",
+    authors: "Sandell, Göran; Reipurth, Bo; Vacca, William D.; Bajaj, Naman S.",
+    journal: "Astrophysical Journal",
+    year: 2021,
+    ads: "https://ui.adsabs.harvard.edu/abs/2021ApJ...920....7S",
+    image: "assets/images/coronet_b59.jpg",
+    firstAuthor: false
   }
 ];
 
 // Sort newest → oldest
 publications.sort((a, b) => b.year - a.year);
 
+// Populate year filter
+const yearFilter = document.getElementById("year-filter");
+const uniqueYears = [...new Set(publications.map(p => p.year))].sort((a, b) => b - a);
+uniqueYears.forEach(year => {
+  const option = document.createElement("option");
+  option.value = year;
+  option.textContent = year;
+  yearFilter.appendChild(option);
+});
+
+// Render publications
 const container = document.getElementById("pub-list");
+const pubEntries = [];
 
 publications.forEach((p, i) => {
   const entry = document.createElement("div");
   entry.className = `pub-entry ${i % 2 === 0 ? "alt1" : "alt2"}`;
+  entry.dataset.year = p.year;
+  entry.dataset.firstAuthor = p.firstAuthor;
 
   const authorsBolded = p.authors.replace(
     /Bajaj,\s*Naman(\s*S\.)?|Naman(\s*S\.)?\s+Bajaj/g,
@@ -124,7 +255,33 @@ publications.forEach((p, i) => {
   `;
 
   container.appendChild(entry);
+  pubEntries.push(entry);
 });
+
+// Filter functionality
+const authorshipFilter = document.getElementById("authorship-filter");
+
+function applyFilters() {
+  const selectedYear = yearFilter.value;
+  const selectedAuthorship = authorshipFilter.value;
+
+  pubEntries.forEach(entry => {
+    const yearMatch = selectedYear === "all" || entry.dataset.year === selectedYear;
+    const authorshipMatch = 
+      selectedAuthorship === "all" ||
+      (selectedAuthorship === "first" && entry.dataset.firstAuthor === "true") ||
+      (selectedAuthorship === "co" && entry.dataset.firstAuthor === "false");
+
+    if (yearMatch && authorshipMatch) {
+      entry.classList.remove("hidden");
+    } else {
+      entry.classList.add("hidden");
+    }
+  });
+}
+
+yearFilter.addEventListener("change", applyFilters);
+authorshipFilter.addEventListener("change", applyFilters);
 
 // Image modal behavior
 const modal = document.getElementById("img-modal");
