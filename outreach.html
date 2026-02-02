@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Outreach | Naman Bajaj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/style.css">
+  <meta name="description" content="Science outreach and communication by Naman Bajaj - podcasts, school visits, and press coverage.">
+  <meta name="author" content="Naman Bajaj">
+  <meta name="keywords" content="Science Outreach, Astronomy Education, Science Communication, JWST Outreach">
+  
+  <style>
+    /* Outreach Page Styling */
+    
+    /* Hero Section */
+    .outreach-hero {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+      border-radius: 16px;
+      border: 2px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .outreach-hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .outreach-hero p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 1rem auto;
+    }
+
+    /* Section Styling */
+    .outreach-section {
+      margin: 4rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .section-header h3 {
+      font-size: 2rem;
+      color: #667eea;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-header h3::before {
+      content: attr(data-icon);
+      font-size: 2.5rem;
+    }
+
+    .section-intro {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-intro p {
+      margin-bottom: 1.2rem;
+    }
+
+    /* Content Grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    /* Card Styling */
+    .outreach-card {
+      background: var(--bg-color, #fff);
+      border: 2px solid rgba(102, 126, 234, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .outreach-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(102, 126, 234, 0.15);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .outreach-card:hover .card-image img {
+      transform: scale(1.08);
+    }
+
+    /* YouTube Video Card */
+    .video-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .video-card .card-image::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4rem;
+      color: white;
+      background: rgba(255, 0, 0, 0.9);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      text-indent: 4px;
+    }
+
+    .video-card:hover .card-image::after {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: rgba(255, 0, 0, 1);
+    }
+
+    .card-content {
+      padding: 1.8rem;
+    }
+
+    .card-content h4 {
+      margin: 0 0 0.8rem 0;
+      font-size: 1.3rem;
+      color: #333;
+    }
+
+    .card-content .meta {
+      font-size: 0.9rem;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-content .meta::before {
+      content: '📅';
+    }
+
+    .card-content p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .card-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .card-link::after {
+      content: ' →';
+    }
+
+    /* Image Placeholder */
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #667eea;
+      font-weight: 600;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .image-placeholder::before {
+      content: '📸';
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      opacity: 0.5;
+    }
+
+    /* Dark Mode */
+    body.dark .outreach-hero {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .outreach-hero h2 {
+      color: #a0b4ff;
+    }
+
+    body.dark .section-header {
+      border-bottom-color: rgba(102, 126, 234, 0.3);
+    }
+
+    body.dark .section-header h3 {
+      color: #a0b4ff;
+    }
+
+    body.dark .outreach-card {
+      background: #2a2a2a;
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .outreach-card:hover {
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    body.dark .card-content h4 {
+      color: #e0e0e0;
+    }
+
+    body.dark .card-content .meta {
+      color: #a0b4ff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .outreach-hero h2 {
+        font-size: 2rem;
+      }
+
+      .section-header h3 {
+        font-size: 1.6rem;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-image {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="index.html" class="nav-link">Home</a>
+  <a href="about.html" class="nav-link">About</a>
+  <a href="research.html" class="nav-link">Research</a>
+  <a href="publications.html" class="nav-link">Publications</a>
+  <a href="outreach.html" class="nav-link">Outreach</a>
+  <a href="contact.html" class="nav-link">Contact</a>
+
+  <button id="theme-toggle">🌓</button>
+</nav>
+
+<main>
+<section class="section" style="max-width: 1100px;">
+
+  <!-- Hero Section -->
+  <div class="outreach-hero">
+    <h2>Science Outreach</h2>
+    <p>
+      Science isn't complete until it's shared. I'm passionate about making astronomy accessible and 
+      inspiring the next generation of scientists—especially those from underrepresented backgrounds. 
+      From podcasts to classrooms to press coverage, I believe in showing young people that they belong 
+      in science.
+    </p>
+  </div>
+
+  <!-- ============================================
+       SECTION 1: PODCASTS
+  ============================================ -->
+  <div class="outreach-section">
+    <div class="section-header">
+      <h3 data-icon="🎙️">Podcasts & Interviews</h3>
+    </div>
+
+    <div class="section-intro">
+      <p>
+        I've had the privilege of sharing my research journey and discoveries through various podcast 
+        appearances. These conversations cover everything from my path from India to NASA-funded astronomy 
+        research, to the latest JWST discoveries about how planets form.
+      </p>
+      <p>
+        Podcasts allow me to connect with diverse audiences—from aspiring scientists wondering if astronomy 
+        is for them, to curious listeners who just want to understand what we're learning about the universe. 
+        It's storytelling at its best, and I love breaking down complex science into relatable stories.
+      </p>
+    </div>
+
+    <div class="content-grid">
+      
+      <!-- Podcast 1: Ryanites Dream On -->
+      <a href="https://www.youtube.com/watch?v=n0HG4r_QG6w" target="_blank" class="outreach-card video-card" style="text-decoration: none;">
+        <div class="card-image">
+          <img src="https://img.youtube.com/vi/n0HG4r_QG6w/maxresdefault.jpg" alt="Ryanites Dream On Podcast">
+        </div>
+        <div class="card-content">
+          <h4>My Journey from India to NASA Astronomy</h4>
+          <div class="meta">Ryanites Dream On Podcast • 2024</div>
+          <p>
+            A personal conversation about growing up in Bhayandar, discovering my passion for astronomy, 
+            and the path that led me to work on JWST observations and NASA-funded research at the University of Arizona.
+          </p>
+        </div>
+      </a>
+
+      <!-- Podcast 2: Second YouTube Link -->
+      <a href="https://www.youtube.com/watch?v=pMazXlqX96E" target="_blank" class="outreach-card video-card" style="text-decoration: none;">
+        <div class="card-image">
+          <img src="https://img.youtube.com/vi/pMazXlqX96E/maxresdefault.jpg" alt="Astronomy Podcast">
+        </div>
+        <div class="card-content">
+          <h4>JWST Discoveries and Planet Formation</h4>
+          <div class="meta">Podcast Interview • 2024</div>
+          <p>
+            Discussing my recent JWST discoveries about disk winds and photoevaporation, what it means for 
+            understanding how planetary systems form, and the groundbreaking observations that revealed 
+            the forces shaping protoplanetary disks.
+          </p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 2: SCHOOL OUTREACH
+  ============================================ -->
+  <div class="outreach-section">
+    <div class="section-header">
+      <h3 data-icon="🎓">School Outreach</h3>
+    </div>
+
+    <div class="section-intro">
+      <p>
+        One of the most rewarding parts of being a scientist is inspiring the next generation. I regularly 
+        visit schools to talk about astronomy, show students what real research looks like, and—most 
+        importantly—show them that someone like them can become a scientist.
+      </p>
+      <p>
+        Whether I'm explaining how planets form to elementary school students using everyday analogies, 
+        or discussing career paths with high schoolers curious about astronomy, these interactions remind 
+        me why I fell in love with science in the first place. Seeing a student's eyes light up when they 
+        understand a concept, or hearing "I didn't know I could do that" is what keeps me going.
+      </p>
+    </div>
+
+    <div class="content-grid">
+      
+      <!-- School Visit 1 - Placeholder -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add photo from school visit<br>
+            <small style="opacity: 0.7;">assets/images/school-visit1.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>School Name Visit</h4>
+          <div class="meta">Location • Date</div>
+          <p>
+            Description of the school visit—what grade levels, what topics were covered, memorable moments 
+            or questions from students, and the impact of connecting with young minds about astronomy.
+          </p>
+        </div>
+      </div>
+
+      <!-- School Visit 2 - Placeholder -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add photo from school visit<br>
+            <small style="opacity: 0.7;">assets/images/school-visit2.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>School Name Visit</h4>
+          <div class="meta">Location • Date</div>
+          <p>
+            Description of another school visit, the activities or demonstrations conducted, and how 
+            students engaged with the material. Perhaps mention questions that surprised you.
+          </p>
+        </div>
+      </div>
+
+      <!-- School Visit 3 - Placeholder -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add photo from school visit<br>
+            <small style="opacity: 0.7;">assets/images/school-visit3.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>School Name Visit</h4>
+          <div class="meta">Location • Date</div>
+          <p>
+            Another school outreach experience—maybe a career day, science fair judging, or astronomy 
+            workshop. Share what made this interaction special and memorable.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 3: PRESS RELEASES
+  ============================================ -->
+  <div class="outreach-section">
+    <div class="section-header">
+      <h3 data-icon="📰">Press & Media Coverage</h3>
+    </div>
+
+    <div class="section-intro">
+      <p>
+        My research has been featured in science news outlets around the world, from the SETI Institute 
+        to university press releases. These articles translate technical astronomy findings into stories 
+        that the public can understand and get excited about—showing how JWST is revolutionizing our 
+        understanding of planet formation.
+      </p>
+      <p>
+        Each press feature is an opportunity to share not just the science, but the <em>story</em>—the 
+        questions that drive us, the surprises we find, and what it means for understanding our place 
+        in the universe. I work closely with science writers to ensure accuracy while keeping the 
+        narrative engaging and accessible.
+      </p>
+    </div>
+
+    <div class="content-grid">
+      
+      <!-- Press 1 -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add screenshot/image<br>
+            <small style="opacity: 0.7;">assets/images/press-seti.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>JWST Captures the End of Planet Formation</h4>
+          <div class="meta">SETI Institute • 2024</div>
+          <p>
+            Featured coverage of my T Cha discovery—the first spatially resolved image of a photoevaporative 
+            disk wind. This article explains how JWST revealed the process that stops giant planet formation.
+          </p>
+          <a href="https://www.seti.org/news/jwst-captures-the-end-of-planet-formation/" target="_blank" class="card-link">Read Article</a>
+        </div>
+      </div>
+
+      <!-- Press 2 -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add screenshot/image<br>
+            <small style="opacity: 0.7;">assets/images/press-uofa.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>Graduate Student Found a Sneaky Extra Star in JWST Data</h4>
+          <div class="meta">University of Arizona • 2025</div>
+          <p>
+            University feature on my discovery of a hidden binary companion revealed by jet wiggles in 
+            JWST observations—showing how careful data analysis can uncover unexpected surprises.
+          </p>
+          <a href="https://grad.arizona.edu/news/graduate-student-astronomer-found-sneaky-extra-star-james-webb-space-telescope-data" target="_blank" class="card-link">Read Article</a>
+        </div>
+      </div>
+
+      <!-- Press 3 -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add screenshot/image<br>
+            <small style="opacity: 0.7;">assets/images/press-earth.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>Cosmic Winds from Planet-Forming Discs Seen for the First Time</h4>
+          <div class="meta">Earth.com • 2024</div>
+          <p>
+            Coverage of the groundbreaking detection of noble gas emission from disk winds, explaining 
+            how these observations provide the first direct view of the forces shaping planetary systems.
+          </p>
+          <a href="https://www.earth.com/news/cosmic-winds-from-planet-forming-discs-seen-for-the-first-time/" target="_blank" class="card-link">Read Article</a>
+        </div>
+      </div>
+
+      <!-- Press 4 -->
+      <div class="outreach-card">
+        <div class="card-image">
+          <div class="image-placeholder">
+            Add screenshot/image<br>
+            <small style="opacity: 0.7;">assets/images/press-noirlab.jpg</small>
+          </div>
+        </div>
+        <div class="card-content">
+          <h4>The Emerging Paradigm of Wind-Driven Disk Evolution</h4>
+          <div class="meta">NOIRLab Invited Talk • 2024</div>
+          <p>
+            Invited presentation at NOIRLab's Science Symposium discussing the new understanding of how 
+            magnetohydrodynamic winds drive protoplanetary disk evolution and planet formation.
+          </p>
+          <a href="https://noirlab.edu/science/videos/ssic-09-naman-bajaj-the-emerging-paradigm" target="_blank" class="card-link">Watch Talk</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+</main>
+
+<footer>
+  © 2026 Naman Bajaj
+</footer>
+
+<script>
+const toggle = document.getElementById("theme-toggle");
+if (localStorage.theme === "dark") document.body.classList.add("dark");
+
+toggle?.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
+});
+</script>
+
+<script>
+const links = document.querySelectorAll('.nav-link');
+links.forEach(link => {
+  if (link.href === window.location.href) {
+    link.classList.add('active');
+  }
+});
+</script>
+
+</body>
+</html>
