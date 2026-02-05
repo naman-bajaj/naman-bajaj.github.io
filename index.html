@@ -22,6 +22,12 @@
       overflow-x: hidden;
     }
 
+    /* INCREASED TOP NAVIGATION FONT SIZE */
+    .nav-bar .nav-link {
+      font-size: 1.2rem !important;
+      font-weight: 600 !important;
+    }
+
     /* Image Carousel Section */
     .carousel-section {
       position: relative;
@@ -225,7 +231,9 @@
       margin: 0 auto;
     }
 
+    /* PANEL CARDS WITH BACKGROUND IMAGES */
     .panel-card {
+      position: relative;
       background: var(--card-bg, #fff);
       border: 2px solid rgba(102, 126, 234, 0.15);
       border-radius: 20px;
@@ -233,8 +241,11 @@
       text-align: center;
       text-decoration: none;
       transition: all 0.3s ease;
-      position: relative;
       overflow: hidden;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     body.dark .panel-card {
@@ -242,16 +253,81 @@
       border-color: rgba(102, 126, 234, 0.3);
     }
 
+    /* Background Image Layer */
     .panel-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+      bottom: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.15;
+      transition: all 0.3s ease;
+      z-index: 0;
+    }
+
+    .panel-card:hover::before {
+      opacity: 0.25;
+      transform: scale(1.05);
+    }
+
+    body.dark .panel-card::before {
+      opacity: 0.2;
+    }
+
+    body.dark .panel-card:hover::before {
+      opacity: 0.3;
+    }
+
+    /* Individual card backgrounds */
+    .panel-card[data-bg="about"]::before {
+      background-image: url('assets/images/Naman-portrait.jpg');
+    }
+
+    .panel-card[data-bg="research"]::before {
+      background-image: url('assets/images/jwst_disk_winds.jpg');
+    }
+
+    .panel-card[data-bg="publications"]::before {
+      background-image: url('assets/images/tcha_miri.jpg');
+    }
+
+    .panel-card[data-bg="outreach"]::before {
+      background-image: url('assets/images/jwst_jets.jpg');
+    }
+
+    /* Gradient overlay for readability */
+    .panel-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%);
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .panel-card::after {
+      background: linear-gradient(to top, rgba(42,42,42,0.95) 0%, rgba(42,42,42,0.7) 100%);
+    }
+
+    .panel-card:hover::after {
+      background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+    }
+
+    body.dark .panel-card:hover::after {
+      background: linear-gradient(to top, rgba(42,42,42,0.9) 0%, rgba(42,42,42,0.6) 100%);
+    }
+
+    /* Content above gradient */
+    .panel-card > * {
+      position: relative;
+      z-index: 2;
     }
 
     .panel-card:hover {
@@ -260,16 +336,7 @@
       border-color: #667eea;
     }
 
-    .panel-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .panel-icon {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
+    /* Remove icon, keep title and description */
     .panel-title {
       font-size: 1.8rem;
       font-weight: 700;
@@ -604,6 +671,10 @@
     }
 
     @media (max-width: 768px) {
+      .nav-bar .nav-link {
+        font-size: 1rem !important;
+      }
+
       .carousel-section {
         height: 50vh;
         min-height: 350px;
@@ -668,10 +739,7 @@
 
       .panel-card {
         padding: 2rem 1.5rem;
-      }
-
-      .panel-icon {
-        font-size: 3rem;
+        min-height: 250px;
       }
 
       .panel-title {
@@ -813,8 +881,7 @@
   
   <div class="panels-grid">
     
-    <a href="about.html" class="panel-card">
-      <span class="panel-icon">👨‍🔬</span>
+    <a href="about.html" class="panel-card" data-bg="about">
       <h3 class="panel-title">About Me</h3>
       <p class="panel-description">
         Learn about my journey from India to NASA-funded astronomy research, my education, 
@@ -823,8 +890,7 @@
       <span class="panel-link">Learn more</span>
     </a>
 
-    <a href="research.html" class="panel-card">
-      <span class="panel-icon">🔬</span>
+    <a href="research.html" class="panel-card" data-bg="research">
       <h3 class="panel-title">Research</h3>
       <p class="panel-description">
         Explore my JWST observations of disk winds, photoevaporation, and the forces that 
@@ -833,8 +899,7 @@
       <span class="panel-link">View research</span>
     </a>
 
-    <a href="publications.html" class="panel-card">
-      <span class="panel-icon">📚</span>
+    <a href="publications.html" class="panel-card" data-bg="publications">
       <h3 class="panel-title">Publications</h3>
       <p class="panel-description">
         Read my 6 peer-reviewed papers including first-author studies in Nature Astronomy, 
@@ -843,8 +908,7 @@
       <span class="panel-link">Browse papers</span>
     </a>
 
-    <a href="outreach.html" class="panel-card">
-      <span class="panel-icon">🎓</span>
+    <a href="outreach.html" class="panel-card" data-bg="outreach">
       <h3 class="panel-title">Outreach</h3>
       <p class="panel-description">
         Discover my science communication through podcasts, school visits, and press coverage—
@@ -1007,7 +1071,7 @@ function createConstellation() {
   
   // Create MORE dots (stars) with random delays for twinkling
   const dots = [];
-  const numDots = 50;  // Increased from 30
+  const numDots = 50;
   
   for (let i = 0; i < numDots; i++) {
     const dot = document.createElement('div');
@@ -1016,7 +1080,7 @@ function createConstellation() {
     const y = Math.random() * height;
     dot.style.left = x + 'px';
     dot.style.top = y + 'px';
-    dot.style.animationDelay = Math.random() * 3 + 's';  // Random twinkle timing
+    dot.style.animationDelay = Math.random() * 3 + 's';
     constellation.appendChild(dot);
     dots.push({ x, y, element: dot });
   }
@@ -1028,7 +1092,6 @@ function createConstellation() {
       const dy = dots[j].y - dots[i].y;
       const distance = Math.sqrt(dx * dx + dy * dy);
       
-      // Connect dots within 250px (increased from 200px)
       if (distance < 250) {
         const line = document.createElement('div');
         line.className = 'constellation-line';
@@ -1037,7 +1100,7 @@ function createConstellation() {
         line.style.left = dots[i].x + 'px';
         line.style.top = dots[i].y + 'px';
         line.style.transform = `rotate(${angle}rad)`;
-        line.style.opacity = (1 - distance / 250) * 0.7;  // More visible
+        line.style.opacity = (1 - distance / 250) * 0.7;
         constellation.appendChild(line);
       }
     }
@@ -1056,7 +1119,6 @@ window.addEventListener('resize', () => {
   }, 250);
 });
 
-// Search Functionality
 // Search Functionality - Search within website
 document.getElementById('searchBox').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
