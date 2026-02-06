@@ -4,24 +4,161 @@
   <meta charset="UTF-8">
   <title>Contact | Naman Bajaj</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="Contact Naman Bajaj, astronomer studying planet formation and protoplanetary disk evolution.">
   <meta name="author" content="Naman Bajaj">
   <meta name="keywords" content="Astronomy, Planet Formation, Protoplanetary Disks, Exoplanets">
-
   <link rel="stylesheet" href="assets/style.css">
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
   
   <style>
-    /* Modern Contact Page Styles */
+    /* Global */
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
+
+    /* Navigation Bar */
+    .nav-bar {
+      position: sticky !important;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.1) !important;
+      padding: 0.8rem 2rem !important;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    body.dark .nav-bar {
+      background: rgba(26, 26, 26, 0.85) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3) !important;
+      border-bottom-color: rgba(102, 126, 234, 0.2) !important;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .nav-bar .nav-link {
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+      padding: 0.6rem 1.2rem !important;
+      border-radius: 10px !important;
+      transition: all 0.3s ease !important;
+      position: relative;
+      color: #333 !important;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    body.dark .nav-bar .nav-link { color: #e0e0e0 !important; }
+
+    .nav-bar .nav-link:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%) !important;
+      transform: translateY(-2px);
+    }
+
+    .nav-bar .nav-link.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    body.dark .nav-bar .nav-link.active { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5); }
+
+    .nav-bar #theme-toggle {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      border: none !important;
+      width: 42px !important;
+      height: 42px !important;
+      border-radius: 50% !important;
+      font-size: 1.3rem !important;
+      cursor: pointer;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .nav-bar #theme-toggle:hover {
+      transform: rotate(180deg) scale(1.1);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .mobile-menu-btn span {
+      width: 22px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    .mobile-nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    body.dark .mobile-nav-links { background: rgba(26, 26, 26, 0.95); }
+    .mobile-nav-links.active { display: flex; max-height: 500px; }
+    .mobile-nav-links .nav-link { width: 100%; text-align: center; padding: 0.8rem 1rem !important; }
+
+    /* Main Content */
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
     .contact-hero {
       text-align: center;
       max-width: 700px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 2.5rem;
     }
 
     .contact-hero h2 {
@@ -34,8 +171,8 @@
     }
 
     .contact-hero p {
-      font-size: 1.1rem;
-      line-height: 1.7;
+      font-size: 1.05rem;
+      line-height: 1.65;
       opacity: 0.85;
     }
 
@@ -43,13 +180,13 @@
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
+      gap: 1.3rem;
+      margin: 2.5rem 0;
     }
 
     .contact-card {
       position: relative;
-      padding: 1.8rem;
+      padding: 1.6rem;
       border-radius: 12px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: 2px solid rgba(0, 0, 0, 0.08);
@@ -75,25 +212,23 @@
       border-color: rgba(102, 126, 234, 0.3);
     }
 
-    .contact-card:hover::before {
-      opacity: 1;
-    }
+    .contact-card:hover::before { opacity: 1; }
 
     .contact-card .icon {
       font-size: 2rem;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7rem;
       display: block;
     }
 
     .contact-card h3 {
       margin: 0 0 0.5rem 0;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
     .contact-card p {
       margin: 0;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
     }
 
     .contact-card a {
@@ -108,7 +243,6 @@
       text-decoration: underline;
     }
 
-    /* Copy Email Button */
     .email-container {
       display: flex;
       align-items: center;
@@ -117,8 +251,8 @@
     }
 
     .copy-btn {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.82rem;
       background: #f0f0f0;
       border: none;
       border-radius: 6px;
@@ -140,38 +274,38 @@
     /* Form Styling */
     .contact-form-wrapper {
       max-width: 700px;
-      margin: 4rem auto 0;
-      padding: 2.5rem;
+      margin: 3rem auto 0;
+      padding: 2rem;
       background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
       border-radius: 16px;
       border: 2px solid rgba(102, 126, 234, 0.1);
     }
 
     .contact-form-wrapper h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.7rem;
+      margin-bottom: 1.3rem;
       text-align: center;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.3rem;
     }
 
     .form-group label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       opacity: 0.9;
     }
 
     .form-group input,
     .form-group textarea {
       width: 100%;
-      padding: 0.9rem 1rem;
+      padding: 0.85rem 1rem;
       border-radius: 10px;
       border: 2px solid rgba(0, 0, 0, 0.1);
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-family: inherit;
       transition: all 0.3s ease;
       background: var(--bg-color, #fff);
@@ -188,13 +322,13 @@
 
     .form-group textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 115px;
     }
 
     .submit-btn {
       width: 100%;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
+      padding: 0.95rem 2rem;
+      font-size: 1.08rem;
       font-weight: 600;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -202,7 +336,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
 
     .submit-btn:hover {
@@ -210,21 +344,18 @@
       box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
     }
 
-    .submit-btn:active {
-      transform: translateY(0);
-    }
+    .submit-btn:active { transform: translateY(0); }
 
     .form-notice {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       opacity: 0.6;
-      margin-top: 1rem;
+      margin-top: 0.9rem;
     }
 
-    /* Success Message */
     .success-message {
       display: none;
-      padding: 1rem;
+      padding: 0.95rem;
       background: #10b981;
       color: white;
       border-radius: 8px;
@@ -233,9 +364,7 @@
       animation: slideIn 0.3s ease;
     }
 
-    .success-message.show {
-      display: block;
-    }
+    .success-message.show { display: block; }
 
     @keyframes slideIn {
       from {
@@ -248,15 +377,247 @@
       }
     }
 
-    /* Dark Mode Adjustments */
+    /* Footer */
+    .home-footer {
+      position: relative;
+      padding: 3.5rem 2rem 2rem;
+      background: #e8e9f3;
+      border-top: 2px solid rgba(102, 126, 234, 0.2);
+      overflow: hidden;
+      width: 100%;
+      margin-top: 3rem;
+    }
+
+    body.dark .home-footer {
+      background: #0d0d0d;
+      border-top-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .footer-constellation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 1;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .constellation-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #667eea;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(102, 126, 234, 0.8), 0 0 30px rgba(102, 126, 234, 0.4);
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    body.dark .constellation-dot {
+      background: #a0b4ff;
+      box-shadow: 0 0 20px rgba(160, 180, 255, 0.9), 0 0 40px rgba(160, 180, 255, 0.5);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .constellation-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.6), transparent);
+      transform-origin: left center;
+      box-shadow: 0 0 8px rgba(102, 126, 234, 0.4);
+    }
+
+    body.dark .constellation-line {
+      background: linear-gradient(90deg, transparent, rgba(160, 180, 255, 0.7), transparent);
+      box-shadow: 0 0 10px rgba(160, 180, 255, 0.5);
+    }
+
+    .footer-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .footer-name {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-tagline {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    body.dark .footer-tagline { color: #b0b0b0; }
+
+    .footer-nav {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: transparent !important;
+    }
+
+    .footer-nav a {
+      color: #333;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      background: transparent !important;
+    }
+
+    .footer-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #667eea;
+      transition: width 0.3s ease;
+    }
+
+    .footer-nav a:hover { color: #667eea; }
+    .footer-nav a:hover::after { width: 100%; }
+    body.dark .footer-nav a { color: #e0e0e0; }
+    body.dark .footer-nav a:hover { color: #a0b4ff; }
+    body.dark .footer-nav a::after { background: #a0b4ff; }
+
+    .search-container {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 1.8rem;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 50px;
+      background: white;
+      color: #333;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .search-box {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border-color: rgba(102, 126, 234, 0.4);
+    }
+
+    body.dark .search-box:focus { border-color: #a0b4ff; }
+    .search-box::placeholder { color: #999; }
+
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .footer-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(102, 126, 234, 0.2);
+      border-color: #667eea;
+      color: #667eea;
+    }
+
+    body.dark .footer-link {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    body.dark .footer-link:hover {
+      border-color: #a0b4ff;
+      color: #a0b4ff;
+    }
+
+    .footer-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .contact-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+      color: white !important;
+      border: none !important;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .contact-btn:hover {
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      color: white !important;
+    }
+
+    .footer-bottom {
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(102, 126, 234, 0.15);
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    body.dark .footer-bottom {
+      border-top-color: rgba(102, 126, 234, 0.25);
+      color: #999;
+    }
+
+    /* Dark Mode */
     body.dark .contact-card {
       background: #2a2a2a;
       border-color: rgba(255, 255, 255, 0.1);
     }
 
-    body.dark .contact-card:hover {
-      border-color: rgba(102, 126, 234, 0.5);
-    }
+    body.dark .contact-card:hover { border-color: rgba(102, 126, 234, 0.5); }
 
     body.dark .contact-form-wrapper {
       background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
@@ -283,16 +644,40 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .contact-hero h2 {
-        font-size: 2rem;
+      body { max-width: 100vw; overflow-x: hidden; }
+
+      .nav-bar {
+        padding: 1rem 1.5rem !important;
+        justify-content: space-between;
+        position: relative;
       }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .nav-links { display: none !important; }
+      .mobile-menu-btn { display: flex; }
+
+      main { padding: 1.5rem; }
+
+      .contact-hero h2 { font-size: 2rem; }
+
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .contact-form-wrapper { padding: 1.5rem; }
+
+      .footer-nav {
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 1.8rem;
       }
 
-      .contact-form-wrapper {
-        padding: 1.5rem;
+      .footer-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+      }
+
+      .footer-link {
+        width: 100%;
+        justify-content: center;
       }
     }
   </style>
@@ -300,22 +685,37 @@
 
 <body>
 
-<!-- Navbar -->
 <nav class="nav-bar">
-  <a href="index.html" class="nav-link">Home</a>
-  <a href="about.html" class="nav-link">About</a>
-  <a href="research.html" class="nav-link">Research</a>
-  <a href="publications.html" class="nav-link">Publications</a>
-  <a href="outreach.html" class="nav-link">Outreach</a>
-  <a href="contact.html" class="nav-link">Contact</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="research.html" class="nav-link">Research</a>
+    <a href="publications.html" class="nav-link">Publications</a>
+    <a href="outreach.html" class="nav-link">Outreach</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+
+  <button class="mobile-menu-btn" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
   <button id="theme-toggle">🌓</button>
+
+  <div class="mobile-nav-links" id="mobileNavLinks">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="research.html" class="nav-link">Research</a>
+    <a href="publications.html" class="nav-link">Publications</a>
+    <a href="outreach.html" class="nav-link">Outreach</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
 </nav>
 
-<!-- Contact Section -->
+<main>
 <section class="section" style="max-width: 1000px;">
   
-  <!-- Hero Section -->
   <div class="contact-hero">
     <h2>Get in Touch</h2>
     <p>
@@ -324,7 +724,6 @@
     </p>
   </div>
 
-  <!-- Contact Cards -->
   <div class="contact-grid">
     
     <div class="contact-card">
@@ -368,7 +767,6 @@
 
   </div>
 
-  <!-- Contact Form -->
   <div class="contact-form-wrapper">
     <h3>Send Me a Message</h3>
     
@@ -407,53 +805,56 @@
   </div>
 
 </section>
+</main>
 
-<!-- Footer -->
-<footer>
-  © 2026 Naman Bajaj
+<footer class="home-footer">
+  <div class="footer-constellation" id="constellation"></div>
+  <div class="footer-container">
+    <h2 class="footer-name">Naman Bajaj</h2>
+    <p class="footer-tagline">Whether you're interested in collaborating on research, discussing science outreach, or just want to chat about planet formation—I'd love to hear from you.</p>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="outreach.html">Outreach</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="search-container">
+      <input type="text" class="search-box" id="searchBox" placeholder="Search this website...">
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/naman-bajaj" target="_blank" class="footer-link">
+        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/naman-bajaj/" target="_blank" class="footer-link">
+        <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        LinkedIn
+      </a>
+      <a href="contact.html" class="footer-link contact-btn">✉️ Get in Touch</a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Naman Bajaj • PhD Candidate, University of Arizona</p>
+      <p style="margin-top: 0.5rem; opacity: 0.7;">Lunar and Planetary Laboratory • NASA FINESST Fellow</p>
+    </div>
+  </div>
 </footer>
 
-<!-- Scripts -->
 <script>
-// Theme toggle
-const toggle = document.getElementById("theme-toggle");
-if (localStorage.theme === "dark") document.body.classList.add("dark");
+const mobileMenuBtn=document.getElementById('mobileMenuBtn');const mobileNavLinks=document.getElementById('mobileNavLinks');mobileMenuBtn.addEventListener('click',()=>{mobileMenuBtn.classList.toggle('active');mobileNavLinks.classList.toggle('active');});document.querySelectorAll('.mobile-nav-links .nav-link').forEach(link=>{link.addEventListener('click',()=>{mobileMenuBtn.classList.remove('active');mobileNavLinks.classList.remove('active');});});
 
-toggle?.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.theme = document.body.classList.contains("dark") ? "dark" : "light";
-});
+function createConstellation(){const constellation=document.getElementById('constellation');const width=constellation.offsetWidth;const height=constellation.offsetHeight;constellation.innerHTML='';const dots=[];const numDots=50;for(let i=0;i<numDots;i++){const dot=document.createElement('div');dot.className='constellation-dot';const x=Math.random()*width;const y=Math.random()*height;dot.style.left=x+'px';dot.style.top=y+'px';dot.style.animationDelay=Math.random()*3+'s';constellation.appendChild(dot);dots.push({x,y,element:dot});}for(let i=0;i<dots.length;i++){for(let j=i+1;j<dots.length;j++){const dx=dots[j].x-dots[i].x;const dy=dots[j].y-dots[i].y;const distance=Math.sqrt(dx*dx+dy*dy);if(distance<250){const line=document.createElement('div');line.className='constellation-line';const angle=Math.atan2(dy,dx);line.style.width=distance+'px';line.style.left=dots[i].x+'px';line.style.top=dots[i].y+'px';line.style.transform=`rotate(${angle}rad)`;line.style.opacity=(1-distance/250)*0.7;constellation.appendChild(line);}}}}window.addEventListener('load',createConstellation);let resizeTimeout;window.addEventListener('resize',()=>{clearTimeout(resizeTimeout);resizeTimeout=setTimeout(()=>{createConstellation();},250);});
 
-// Active nav link
-document.querySelectorAll('.nav-link').forEach(link => {
-  if (link.href === window.location.href) {
-    link.classList.add('active');
-  }
-});
+document.getElementById('searchBox').addEventListener('keypress',(e)=>{if(e.key==='Enter'){const searchTerm=e.target.value.trim().toLowerCase();if(searchTerm){const pages=[{url:'index.html',title:'Home',keywords:['home','naman bajaj','astronomer','planet formation','jwst','nasa','protoplanetary disk','disk winds','photoevaporation']},{url:'about.html',title:'About Me',keywords:['about','biography','education','background','india','university of arizona','phd','mechanical engineering','astronomy']},{url:'research.html',title:'Research',keywords:['research','disk evolution','disk dispersal','circumbinary','jwst','miri','nirspec','photoevaporation','mhd winds','jets','tcha','binary']},{url:'publications.html',title:'Publications',keywords:['publications','papers','nature astronomy','astronomical journal','astrophysical journal','first author','ads','pascucci','bajaj']},{url:'outreach.html',title:'Outreach',keywords:['outreach','podcast','school','press','media','science communication','education','seti']},{url:'contact.html',title:'Contact',keywords:['contact','email','collaboration','get in touch','reach out']}];const matches=pages.filter(page=>{return page.keywords.some(keyword=>keyword.includes(searchTerm))||page.title.toLowerCase().includes(searchTerm);});if(matches.length>0){window.location.href=matches[0].url;}else{const googleSearch=confirm(`No direct match found for "${searchTerm}".\n\nWould you like to search on Google instead?`);if(googleSearch){window.open(`https://www.google.com/search?q=site:naman-bajaj.github.io ${encodeURIComponent(searchTerm)}`,'_blank');}}}}});
 
-// Copy email to clipboard
-function copyEmail(button) {
-  const email = "namanbajaj@arizona.edu";
-  navigator.clipboard.writeText(email).then(() => {
-    button.textContent = "Copied!";
-    button.classList.add("copied");
-    setTimeout(() => {
-      button.textContent = "Copy";
-      button.classList.remove("copied");
-    }, 2000);
-  });
-}
+const toggle=document.getElementById("theme-toggle");if(localStorage.theme==="dark")document.body.classList.add("dark");toggle?.addEventListener("click",()=>{document.body.classList.toggle("dark");localStorage.theme=document.body.classList.contains("dark")?"dark":"light";});
 
-// Form submission handler
-function handleSubmit(event) {
-  // Let the form submit naturally to Formspree
-  // But show success message after a brief delay
-  const form = event.target;
-  const successMessage = document.getElementById('successMessage');
-  
-  // Show success after form processes (Formspree redirects by default)
-  // This is optional - you may want to configure Formspree to return JSON instead
-}
+document.querySelectorAll('.nav-link').forEach(link=>{if(link.href===window.location.href){link.classList.add('active');}});
+
+function copyEmail(button){const email="namanbajaj@arizona.edu";navigator.clipboard.writeText(email).then(()=>{button.textContent="Copied!";button.classList.add("copied");setTimeout(()=>{button.textContent="Copy";button.classList.remove("copied");},2000);});}
+
+function handleSubmit(event){}
 </script>
 
 </body>
